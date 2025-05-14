@@ -1,5 +1,6 @@
 package com.d288.demo.config;
 
+
 import com.d288.demo.entities.*;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
