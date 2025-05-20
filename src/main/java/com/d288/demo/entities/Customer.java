@@ -46,7 +46,7 @@ public class Customer {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="division_id")
-    private Division divisions;
+    private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Cart> carts;
