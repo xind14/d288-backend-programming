@@ -41,7 +41,7 @@ public class Excursion {
     @JoinColumn(name = "vacation_id")
     private Vacation vacation;
 
-    @ManyToMany(mappedBy = "excurions")
+    @ManyToMany(mappedBy = "excursions")
     Set<CartItem> cart_items;
 
 
