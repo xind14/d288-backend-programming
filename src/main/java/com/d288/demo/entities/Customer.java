@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.util.HashSet;
 import java.util.Date;
 import java.util.Set;
 
@@ -50,5 +51,13 @@ public class Customer {
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Cart> carts;
+
+    public void addCart(Cart cart) {
+        if (carts == null) {
+            carts = new HashSet<>();
+        }
+        carts.add(cart);
+        cart.setCustomer(this);
+    }
 
 }
