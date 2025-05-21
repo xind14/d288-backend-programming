@@ -42,7 +42,7 @@ public class CheckoutServiceImpl implements CheckoutService{
 
         //populate customer with cart
         Customer customer = purchase.getCustomer();
-        customer.addCart(cart);;
+        customer.add(cart);
 
         //save to database
         cart.setStatus(StatusType.ordered);

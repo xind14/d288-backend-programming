@@ -2,6 +2,7 @@ package com.d288.demo.entities;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +16,7 @@ import java.util.Set;
 @Table(name="customers")
 @Getter
 @Setter
+@Data
 public class Customer {
 
     @Id
@@ -53,11 +55,16 @@ public class Customer {
     private Set<Cart> carts;
 
     public void add(Cart cart) {
-        if (carts == null) {
-            carts = new HashSet<>();
+
+        if (cart != null) {
+
+            if (carts == null) {
+                carts = new HashSet<>();
+            }
+
+            carts.add(cart);
+            cart.setCustomer(this);
         }
-        carts.add(cart);
-        cart.setCustomer(this);
     }
 
 }
