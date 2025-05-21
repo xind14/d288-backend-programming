@@ -25,34 +25,34 @@ public class Customer {
     @Column(name = "customer_first_name", nullable = false)
     private String firstName;
 
-    @Column(name = "customer_last_name")
+    @Column(name = "customer_last_name",nullable = false)
     private String lastName;
 
-    @Column(name = "address")
+    @Column(name = "address",nullable = false)
     private String address;
 
-    @Column(name = "postal_code")
+    @Column(name = "postal_code",nullable = false)
     private String postal_code;
 
-    @Column(name = "phone")
+    @Column(name = "phone",nullable = false)
     private String phone;
 
-    @Column(name = "create_date", nullable = false)
+    @Column(name = "create_date")
     @CreationTimestamp
     private Date create_date;
 
-    @Column(name = "last_update", nullable = false)
+    @Column(name = "last_update")
     @UpdateTimestamp
     private Date last_update;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="division_id")
+    @JoinColumn(name="division_id", nullable = false)
     private Division division;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
     private Set<Cart> carts;
 
-    public void addCart(Cart cart) {
+    public void add(Cart cart) {
         if (carts == null) {
             carts = new HashSet<>();
         }
