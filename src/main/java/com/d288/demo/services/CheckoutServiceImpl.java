@@ -28,6 +28,18 @@ public class CheckoutServiceImpl implements CheckoutService{
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
+        if (purchase.getCart() == null ||
+                purchase.getCart().getCartItem() == null ||
+                purchase.getCart().getCartItem().isEmpty()) {
+            return new PurchaseResponse("Cart cannot be empty to checkout");
+        }
+
+        // 2. Validate party size is at least 1
+        if (purchase.getCart().getParty_size() < 1) { // Matches your entity field name
+            return new PurchaseResponse("Party size must be at least 1 to checkout");
+        }
+
+
         // retrieve cart info from dto
         Cart cart=purchase.getCart();
 
