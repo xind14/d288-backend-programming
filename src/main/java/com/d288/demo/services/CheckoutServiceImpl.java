@@ -28,40 +28,36 @@ public class CheckoutServiceImpl implements CheckoutService{
     @Override
     @Transactional
     public PurchaseResponse placeOrder(Purchase purchase) {
-        if (purchase.getCart() == null ||
-                purchase.getCart().getCartItem() == null ||
-                purchase.getCart().getCartItem().isEmpty()) {
-            return new PurchaseResponse("Cart cannot be empty to checkout");
+
+        try{
+            // retrieve cart info from dto
+            Cart cart=purchase.getCart();
+
+            // generate tracking number
+            String orderTrackingNumber=generateOrderTrackingNumber();
+            cart.setOrderTrackingNumber(orderTrackingNumber);
+
+            //populate cart with cart items
+            Set<CartItem> cartItems = purchase.getCartItems();
+            cartItems.forEach(item -> item.setCart(cart));
+            cartItems.forEach(item -> cart.add(item));
+
+            //populate customer with cart
+            Customer customer = purchase.getCustomer();
+            customer.add(cart);
+
+            //save to database
+            cart.setStatus(StatusType.ordered);
+            cartRepository.save(cart);
+
+            if (customer==null||cartItems.isEmpty()){
+                throw new IllegalArgumentException("Party Size can't be zero and cart can't be empty.");
+            }
+            return new PurchaseResponse(orderTrackingNumber);
+        } catch (Exception e){
+            return new PurchaseResponse(e.getMessage());
         }
 
-        // 2. Validate party size is at least 1
-        if (purchase.getCart().getParty_size() < 1) { // Matches your entity field name
-            return new PurchaseResponse("Party size must be at least 1 to checkout");
-        }
-
-
-        // retrieve cart info from dto
-        Cart cart=purchase.getCart();
-
-        // generate tracking number
-        String orderTrackingNumber=generateOrderTrackingNumber();
-        cart.setOrderTrackingNumber(orderTrackingNumber);
-
-        //populate cart with cart items
-        Set<CartItem> cartItems = purchase.getCartItems();
-        cartItems.forEach(item -> item.setCart(cart));
-        cartItems.forEach(item -> cart.add(item));
-
-        //populate customer with cart
-        Customer customer = purchase.getCustomer();
-        customer.add(cart);
-
-        //save to database
-        cart.setStatus(StatusType.ordered);
-        cartRepository.save(cart);
-
-        //return a response
-        return new PurchaseResponse(orderTrackingNumber);
     }
 
     private String generateOrderTrackingNumber() {
