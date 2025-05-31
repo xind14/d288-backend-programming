@@ -13,6 +13,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ Shopping cart entity that stores cart items, prices,timestamp, and manages relationship with cart items and customer
+ **/
 @Entity
 @Table(name="carts")
 @Getter
@@ -46,10 +49,12 @@ public class Cart {
     @UpdateTimestamp
     private Date last_update;
 
+    // Many-to-one relationship with Customer
     @ManyToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
+    // One-to-many relationship with CartItem
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart")
     private Set<CartItem> cartItem = new HashSet<>();
 

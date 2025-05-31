@@ -9,6 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Date;
 import java.util.Set;
 
+/**
+Country entity that contains divisions and regions
+ **/
 @Entity
 @Table(name = "countries")
 @Getter

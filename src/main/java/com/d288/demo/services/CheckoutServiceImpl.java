@@ -19,7 +19,6 @@ public class CheckoutServiceImpl implements CheckoutService{
     private CartRepository cartRepository;
     private CartItemRepository cartItemRepository;
 
-
     public CheckoutServiceImpl(CustomerRepository customerRepository, CartRepository cartRepository,CartItemRepository cartItemRepository){
         this.customerRepository=customerRepository;
         this.cartRepository=cartRepository;

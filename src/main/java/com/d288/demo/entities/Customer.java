@@ -12,6 +12,9 @@ import java.util.HashSet;
 import java.util.Date;
 import java.util.Set;
 
+/**
+ Customer entity with individual customer details and cart history. Manages relationships with division and cart entities
+ **/
 @Entity
 @Table(name="customers")
 @Getter

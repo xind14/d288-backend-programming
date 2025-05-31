@@ -9,6 +9,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.sql.Date;
 import java.util.Set;
 
+/**
+ Creating divisions within a country, manages relationship with country and customer
+ **/
 @Entity
 @Table(name = "divisions")
 @Setter
@@ -40,7 +43,4 @@ public class Division {
 
     @Column(name = "country_id")
     private Long country_id;
-
-
-
 }

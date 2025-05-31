@@ -10,6 +10,9 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.Set;
 
+/**
+ Entity for a vacation package containing different excursions with pricing, descriptions, and images
+ **/
 @Entity
 @Table(name = "vacations")
 @Setter

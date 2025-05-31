@@ -6,6 +6,10 @@ import com.d288.demo.entities.Customer;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+
+/**
+Initialize 5 sample customers data
+ **/
 @Component
 public class BootStrapData implements CommandLineRunner {
 

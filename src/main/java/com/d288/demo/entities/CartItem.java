@@ -10,6 +10,9 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ Item in cart entity that stores and links vacations and excursions
+ **/
 @Entity
 @Table(name = "cart_items")
 @Getter
